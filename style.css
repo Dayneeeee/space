@@ -1,0 +1,219 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #0a0e27 0%, #1a1a2e 50%, #0f0f1e 100%);
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            text-align: center;
+        }
+
+        canvas {
+            border: 3px solid #00ff88;
+            background: #000814;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5),
+                        inset 0 0 50px rgba(0, 20, 40, 0.8);
+            border-radius: 8px;
+        }
+
+        .hud {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: #00ff88;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff88;
+            pointer-events: none;
+        }
+
+        .power-meter {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .power-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00ff88 0%, #00d4ff 50%, #0088ff 100%);
+            transition: width 0.1s;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+        }
+
+        .power-fill.charging {
+            background: linear-gradient(90deg, #ffcc00 0%, #ff6600 50%, #ff0066 100%);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+            animation: pulse-glow 0.5s ease-in-out infinite;
+        }
+
+        .power-fill.cooldown {
+            background: linear-gradient(90deg, #666 0%, #888 50%, #666 100%);
+            box-shadow: none;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .power-text {
+            position: absolute;
+            bottom: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ff88;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff88;
+            pointer-events: none;
+        }
+
+        .pause-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            background: #00ff88;
+            color: #000;
+            border: 2px solid #00ff88;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            z-index: 10;
+        }
+
+        .pause-btn:hover {
+            background: #00d4ff;
+            border-color: #00d4ff;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .game-over, .start-screen, .pause-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px;
+            border: 3px solid #00ff88;
+            border-radius: 10px;
+            color: #00ff88;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .pause-screen {
+            border-color: #ffcc00;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.6);
+        }
+
+        .pause-screen h1 {
+            color: #ffcc00;
+            text-shadow: 0 0 20px #ffcc00;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .game-over h1, .start-screen h1, .pause-screen h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .start-screen h1 {
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .game-over p, .start-screen p, .pause-screen p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            background: #00ff88;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        button:hover {
+            background: #00d4ff;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+        }
+
+        .controls {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-48%, -50%) rotate(-2deg); }
+            75% { transform: translate(-52%, -50%) rotate(2deg); }
+        }
+
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }

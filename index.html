@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Space Invaders - Enhanced</title>
+</head>
+<body>
+    <div class="game-container">
+        <div class="hud">
+            <div>SCORE: <span id="score">0</span></div>
+            <div>LIVES: <span id="lives">3</span></div>
+            <div>LEVEL: <span id="level">1</span></div>
+        </div>
+        
+        <div class="power-text" id="powerText" style="display: none;">HOLD SPACE TO CHARGE</div>
+        <div class="power-meter" id="powerMeter" style="display: none;">
+            <div class="power-fill" id="powerFill"></div>
+        </div>
+        
+        <button id="pauseBtn" class="pause-btn hidden" onclick="togglePause()">⏸ PAUSE</button>
+        
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div id="startScreen" class="start-screen">
+            <h1>SPACE INVADERS</h1>
+            <p>Defend Earth from the alien invasion!</p>
+            <button onclick="startGame()">START GAME</button>
+            <button onclick="showGuidelines()" style="margin-left: 10px;">GUIDELINES</button>
+        </div>
+
+        <div id="guidelinesScreen" class="start-screen hidden">
+            <h1>HOW TO PLAY</h1>
+            <div style="text-align: left; margin: 20px 0;">
+                <p style="margin: 15px 0;"><strong>OBJECTIVE:</strong> Defeat all aliens and the MOTHER SPACE boss!</p>
+                <p style="margin: 15px 0;"><strong>CONTROLS:</strong></p>
+                <p style="margin: 5px 0 5px 20px;">• Arrow Left/Right - Move your ship</p>
+                <p style="margin: 5px 0 5px 20px;">• SPACE (tap) - Fire bullets (max 3 at once)</p>
+                <p style="margin: 5px 0 5px 20px;">• SPACE (hold 5 sec) - MEGA LASER BEAM!</p>
+                <p style="margin: 5px 0 5px 20px;">• P or Pause Button - Pause/Resume game</p>
+                
+                <p style="margin: 15px 0;"><strong>LASER SUPERPOWER:</strong></p>
+                <p style="margin: 5px 0 5px 20px;">• Hold SPACE for 5 seconds to charge</p>
+                <p style="margin: 5px 0 5px 20px;">• Fires devastating laser beam!</p>
+                <p style="margin: 5px 0 5px 20px;">• Destroys everything in its path!</p>
+                <p style="margin: 5px 0 5px 20px;">• 5 second cooldown after use</p>
+                <p style="margin: 5px 0 5px 20px;">• Watch the power meter at the bottom!</p>
+                
+                <p style="margin: 15px 0;"><strong>ENEMIES:</strong></p>
+                <p style="margin: 5px 0 5px 20px;">• Red aliens = 30 points</p>
+                <p style="margin: 5px 0 5px 20px;">• Orange aliens = 20 points</p>
+                <p style="margin: 5px 0 5px 20px;">• Yellow aliens = 10 points</p>
+                <p style="margin: 5px 0 5px 20px;">• MOTHER SPACE (Level 3) = 1000 points + victory!</p>
+                
+                <p style="margin: 15px 0;"><strong>COMBO SYSTEM:</strong></p>
+                <p style="margin: 5px 0 5px 20px;">• Hit enemies quickly for combo bonuses!</p>
+                <p style="margin: 5px 0 5px 20px;">• Each combo adds 50% bonus points</p>
+                
+                <p style="margin: 15px 0;"><strong>GAME PROGRESSION:</strong></p>
+                <p style="margin: 5px 0 5px 20px;">• Complete 3 levels to win</p>
+                <p style="margin: 5px 0 5px 20px;">• Level 3: Epic boss fight!</p>
+                <p style="margin: 5px 0 5px 20px;">• Boss has 50 HP - watch the health bar!</p>
+            </div>
+            <button onclick="hideGuidelines()">BACK TO MENU</button>
+        </div>
+
+        <div id="pauseScreen" class="pause-screen hidden">
+            <h1>⏸ PAUSED</h1>
+            <p style="margin: 20px 0;">Game is paused</p>
+            <p>Current Score: <span id="pauseScore">0</span></p>
+            <p>Current Level: <span id="pauseLevel">1</span></p>
+            <button onclick="togglePause()">▶ RESUME</button>
+            <button onclick="quitToMenu()" style="margin-left: 10px;">QUIT TO MENU</button>
+        </div>
+
+        <div id="gameOver" class="game-over hidden">
+            <h1>GAME OVER</h1>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Level Reached: <span id="finalLevel">1</span></p>
+            <p id="highScoreDisplay" style="margin-top: 15px; color: #ffcc00;"></p>
+            <button onclick="restartGame()">PLAY AGAIN</button>
+            <button onclick="backToMenu()" style="margin-left: 10px;">MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
